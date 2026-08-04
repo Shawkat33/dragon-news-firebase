@@ -2,10 +2,12 @@ import { FiBookmark, FiShare2 } from "react-icons/fi";
 import { FaStar, FaRegStar } from "react-icons/fa6";
 import { format } from "date-fns";
 import { IoEye } from "react-icons/io5";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
 	// Destructuring the provided dataset
-	const { title, rating, total_view, author, image_url, details, tags } = news;
+	const { id, title, rating, total_view, author, image_url, details, tags } =
+		news;
 
 	// Format dates using date-fns to mirror image_94baff.png exactly
 	const headerDate = author?.published_date
@@ -80,9 +82,13 @@ const NewsCard = ({ news }) => {
 					<span className="text-gray-600 font-normal">
 						{details?.length > 270 ? `${details.slice(0, 270)}...` : details}
 					</span>
-					<span className="block mt-2 text-orange-500 font-bold cursor-pointer hover:underline w-fit">
+					<Link
+						to={`/news-details/${id}`}
+						className="mt-2 text-orange-500 font-bold cursor-pointer hover:underline w-fit"
+					>
+						{" "}
 						Read More
-					</span>
+					</Link>
 				</div>
 
 				{/* Slimline Divider Line */}

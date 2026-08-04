@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import NewsCard from "../Components/NewsCard";
 
@@ -7,6 +7,8 @@ const CategoryNews = () => {
 	// console.log(id);
 	const data = useLoaderData();
 	// console.log(data);
+
+	const scrollContainerRef = useRef(null);
 
 	const [categoryNews, setCategoryNews] = useState([]);
 
@@ -26,6 +28,8 @@ const CategoryNews = () => {
 
 			setCategoryNews(filteredNews);
 		}
+
+		scrollContainerRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [id, data]);
 
 	// useEffect(() => {
@@ -45,7 +49,7 @@ const CategoryNews = () => {
 	// }, [data, id]);
 
 	return (
-		<div>
+		<div ref={scrollContainerRef}>
 			<h2 className="font-bold mb-5">
 				Total <span className="text-secondary">{categoryNews.length}</span>{" "}
 				found
